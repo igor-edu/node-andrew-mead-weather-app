@@ -7,6 +7,9 @@ const forecast = require('./utils/forecast');
 // express is just a function that we call and returns an object whose methods we will use
 const app = express();
 
+// provide the port number which will be used later when we set where to listen
+const port = process.env.PORT || 3000;
+
 // setup a path to the public directory that will be served from the root route request as a static files directory
 const publicDirectoryPath = path.join(__dirname, '../public');
 // first lookup in the public folder for a match
@@ -82,7 +85,7 @@ app.get('/products', (req, res) => {
   console.log(req.query);
   res.send({
     products: []
-  })
+  });
 });
 
 app.get('/help/*', (req, res) => {
@@ -91,7 +94,7 @@ app.get('/help/*', (req, res) => {
     error: 'Help article not found',
     name: 'Andrew Mead',
     title: 'Help Article'
-  })
+  });
 });
 
 app.get('*', (req, res) => {
@@ -103,6 +106,6 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000...');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}...`);
 });
